@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      # 安裝 g4f
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
       # 3. 執行 Python 腳本
       - name: Run script
         run: |

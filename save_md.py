@@ -1,7 +1,15 @@
 import os
 import datetime
+from g4f.client import Client
 
 def main():
+    client = Client()
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": f'請給我一篇300字的心靈雞湯，用 MD 格式直接回覆文章'}],
+        # Add any other necessary parameters
+    )
+
     # 先定義要寫入的資料夾名稱
     folder_name = "auto_gen"
     # 確保資料夾存在，若不存在就自動建立
@@ -16,9 +24,9 @@ def main():
 
     # 寫入內容
     content = f"""# Example File
-
-This file was generated at {datetime.datetime.now()}.
-"""
+    {response.choices[0].message.content}
+    This file was generated at {datetime.datetime.now()}.
+    """
 
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
