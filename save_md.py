@@ -6,7 +6,7 @@ def main():
     client = Client()
     response = client.chat.completions.create(
         model="gpt-4o",
-        messages=[{"role": "user", "content": f'請給我一篇300字的心靈雞湯，用 MD 格式直接回覆文章'}],
+        messages=[{"role": "user", "content": f'請給我一篇300字的心靈雞湯，請直接回覆給我 jekyll '}],
         # Add any other necessary parameters
     )
 
@@ -23,10 +23,11 @@ def main():
     file_path = os.path.join(folder_name, filename)
 
     # 寫入內容
-    content = f"""# Example File
-    {response.choices[0].message.content}
-    This file was generated at {datetime.datetime.now()}.
-    """
+    content = response.choices[0].message.content
+    # f"""# Example File
+    # {response.choices[0].message.content}
+    # This file was generated at {datetime.datetime.now()}.
+    # """
 
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
